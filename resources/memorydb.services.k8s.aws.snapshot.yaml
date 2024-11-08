@@ -1,0 +1,66 @@
+properties:
+  apiVersion:
+    default: memorydb.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "SnapshotSpec defines the desired state of Snapshot. \n Represents a copy of an entire cluster as of the time when the snapshot was taken."
+    properties:
+      clusterName:
+        description: The snapshot is created from this cluster.
+        type: string
+      clusterRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      kmsKeyID:
+        description: The ID of the KMS key used to encrypt the snapshot.
+        type: string
+      kmsKeyRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      name:
+        description: A name for the snapshot being created.
+        type: string
+      sourceSnapshotName:
+        description: The name of an existing snapshot from which to make a copy.
+        type: string
+      tags:
+        description: A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.
+        items:
+          description: A tag that can be added to an MemoryDB resource. Tags are composed of a Key/Value pair. You can use tags to categorize and track all your MemoryDB resources. When you add or remove tags on clusters, those actions will be replicated to all nodes in the cluster. A tag with a null Value is permitted. For more information, see Tagging your MemoryDB resources (https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging-resources.html)
+          properties:
+            key:
+              type: string
+            value:
+              type: string
+          type: object
+        type: array
+    required:
+      - name
+    title: memorydb.services.k8s.aws.Snapshot configuration options
+    type: object
+  kind:
+    default: Snapshot
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - memorydb.services.k8s.aws.snapshot

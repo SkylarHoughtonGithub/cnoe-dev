@@ -1,0 +1,69 @@
+properties:
+  apiVersion:
+    default: eventbridge.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "EndpointSpec defines the desired state of Endpoint. \n An global endpoint used to improve your application's availability by making it regional-fault tolerant. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html) in the Amazon EventBridge User Guide.."
+    properties:
+      description:
+        description: A description of the global endpoint.
+        type: string
+      eventBuses:
+        description: "Define the event buses used. \n The names of the event buses must be identical in each Region."
+        items:
+          description: The event buses the endpoint is associated with.
+          properties:
+            eventBusARN:
+              type: string
+          type: object
+        type: array
+      name:
+        description: The name of the global endpoint. For example, "Name":"us-east-2-custom_bus_A-endpoint".
+        type: string
+      replicationConfig:
+        description: Enable or disable event replication.
+        properties:
+          state:
+            type: string
+        type: object
+      roleARN:
+        description: The ARN of the role used for replication.
+        type: string
+      routingConfig:
+        description: Configure the routing policy, including the health check and secondary Region..
+        properties:
+          failoverConfig:
+            description: The failover configuration for an endpoint. This includes what triggers failover and what happens when it's triggered.
+            properties:
+              primary:
+                description: The primary Region of the endpoint.
+                properties:
+                  healthCheck:
+                    type: string
+                type: object
+              secondary:
+                description: The secondary Region that processes events when failover is triggered or replication is enabled.
+                properties:
+                  route:
+                    type: string
+                type: object
+            type: object
+        type: object
+    required:
+      - eventBuses
+      - name
+      - routingConfig
+    title: eventbridge.services.k8s.aws.Endpoint configuration options
+    type: object
+  kind:
+    default: Endpoint
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - eventbridge.services.k8s.aws.endpoint

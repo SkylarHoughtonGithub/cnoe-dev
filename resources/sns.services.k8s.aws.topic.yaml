@@ -1,0 +1,76 @@
+properties:
+  apiVersion:
+    default: sns.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "TopicSpec defines the desired state of Topic. \n A wrapper type for the topic's Amazon Resource Name (ARN). To retrieve a topic's attributes, use GetTopicAttributes."
+    properties:
+      contentBasedDeduplication:
+        type: string
+      dataProtectionPolicy:
+        description: "The body of the policy document you want to use for this topic. \n You can only add one policy per topic. \n The policy must be in JSON string format. \n Length Constraints: Maximum length of 30,720."
+        type: string
+      deliveryPolicy:
+        type: string
+      displayName:
+        type: string
+      fifoTopic:
+        type: string
+      kmsMasterKeyID:
+        type: string
+      kmsMasterKeyRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      name:
+        description: "The name of the topic you want to create. \n Constraints: Topic names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, and hyphens, and must be between 1 and 256 characters long. \n For a FIFO (first-in-first-out) topic, the name must end with the .fifo suffix."
+        type: string
+      policy:
+        type: string
+      policyRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      signatureVersion:
+        type: string
+      tags:
+        description: "The list of tags to add to a new topic. \n To be able to tag a topic on creation, you must have the sns:CreateTopic and sns:TagResource permissions."
+        items:
+          description: The list of tags to be added to the specified topic.
+          properties:
+            key:
+              type: string
+            value:
+              type: string
+          type: object
+        type: array
+      tracingConfig:
+        type: string
+    required:
+      - name
+    title: sns.services.k8s.aws.Topic configuration options
+    type: object
+  kind:
+    default: Topic
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - sns.services.k8s.aws.topic

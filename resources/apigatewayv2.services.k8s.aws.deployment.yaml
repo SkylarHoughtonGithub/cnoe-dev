@@ -1,0 +1,37 @@
+properties:
+  apiVersion:
+    default: apigatewayv2.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "DeploymentSpec defines the desired state of Deployment. \n An immutable representation of an API that can be called by users. A Deployment must be associated with a Stage for it to be callable over the internet."
+    properties:
+      apiID:
+        type: string
+      apiRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      description:
+        type: string
+      stageName:
+        type: string
+    title: apigatewayv2.services.k8s.aws.Deployment configuration options
+    type: object
+  kind:
+    default: Deployment
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - apigatewayv2.services.k8s.aws.deployment

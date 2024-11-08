@@ -1,0 +1,107 @@
+properties:
+  apiVersion:
+    default: apigatewayv2.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "StageSpec defines the desired state of Stage. \n Represents an API stage."
+    properties:
+      accessLogSettings:
+        description: Settings for logging access in a stage.
+        properties:
+          destinationARN:
+            description: Represents an Amazon Resource Name (ARN).
+            type: string
+          format:
+            description: A string with a length between [1-1024].
+            type: string
+        type: object
+      apiID:
+        type: string
+      apiRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      autoDeploy:
+        type: boolean
+      clientCertificateID:
+        type: string
+      defaultRouteSettings:
+        description: Represents a collection of route settings.
+        properties:
+          dataTraceEnabled:
+            type: boolean
+          detailedMetricsEnabled:
+            type: boolean
+          loggingLevel:
+            description: The logging level.
+            type: string
+          throttlingBurstLimit:
+            format: int64
+            type: integer
+          throttlingRateLimit:
+            type: number
+        type: object
+      deploymentID:
+        type: string
+      deploymentRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      description:
+        type: string
+      routeSettings:
+        additionalProperties:
+          description: Represents a collection of route settings.
+          properties:
+            dataTraceEnabled:
+              type: boolean
+            detailedMetricsEnabled:
+              type: boolean
+            loggingLevel:
+              description: The logging level.
+              type: string
+            throttlingBurstLimit:
+              format: int64
+              type: integer
+            throttlingRateLimit:
+              type: number
+          type: object
+        type: object
+      stageName:
+        type: string
+      stageVariables:
+        additionalProperties:
+          type: string
+        type: object
+      tags:
+        additionalProperties:
+          type: string
+        type: object
+    required:
+      - stageName
+    title: apigatewayv2.services.k8s.aws.Stage configuration options
+    type: object
+  kind:
+    default: Stage
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - apigatewayv2.services.k8s.aws.stage

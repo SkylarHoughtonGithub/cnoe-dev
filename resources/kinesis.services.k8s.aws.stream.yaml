@@ -1,0 +1,36 @@
+properties:
+  apiVersion:
+    default: kinesis.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: StreamSpec defines the desired state of Stream.
+    properties:
+      name:
+        description: A name to identify the stream. The stream name is scoped to the Amazon Web Services account used by the application that creates the stream. It is also scoped by Amazon Web Services Region. That is, two streams in two different Amazon Web Services accounts can have the same name. Two streams in the same Amazon Web Services account but in two different Regions can also have the same name.
+        type: string
+      shardCount:
+        description: The number of shards that the stream will use. The throughput of the stream is a function of the number of shards; more shards are required for greater provisioned throughput.
+        format: int64
+        type: integer
+      streamModeDetails:
+        description: Indicates the capacity mode of the data stream. Currently, in Kinesis Data Streams, you can choose between an on-demand capacity mode and a provisioned capacity mode for your data streams.
+        properties:
+          streamMode:
+            type: string
+        type: object
+    required:
+      - name
+    title: kinesis.services.k8s.aws.Stream configuration options
+    type: object
+  kind:
+    default: Stream
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - kinesis.services.k8s.aws.stream

@@ -1,0 +1,33 @@
+properties:
+  apiVersion:
+    default: sns.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: PlatformEndpointSpec defines the desired state of PlatformEndpoint.
+    properties:
+      customUserData:
+        type: string
+      enabled:
+        type: string
+      platformApplicationARN:
+        description: PlatformApplicationArn returned from CreatePlatformApplication is used to create a an endpoint.
+        type: string
+      token:
+        type: string
+    required:
+      - platformApplicationARN
+      - token
+    title: sns.services.k8s.aws.PlatformEndpoint configuration options
+    type: object
+  kind:
+    default: PlatformEndpoint
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - sns.services.k8s.aws.platformendpoint

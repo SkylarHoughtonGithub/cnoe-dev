@@ -1,0 +1,70 @@
+properties:
+  apiVersion:
+    default: elasticache.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    properties:
+      accessString:
+        description: Access permissions string used for this user.
+        type: string
+      engine:
+        description: The current supported value is Redis.
+        type: string
+      noPasswordRequired:
+        description: Indicates a password is not required for this user.
+        type: boolean
+      passwords:
+        description: Passwords used for this user. You can create up to two passwords for each user.
+        items:
+          description: SecretKeyReference combines a k8s corev1.SecretReference with a specific key within the referred-to Secret
+          properties:
+            key:
+              description: Key is the key within the secret
+              type: string
+            name:
+              description: name is unique within a namespace to reference a secret resource.
+              type: string
+            namespace:
+              description: namespace defines the space within which the secret name must be unique.
+              type: string
+          required:
+            - key
+          type: object
+          x-kubernetes-map-type: atomic
+        type: array
+      tags:
+        description: A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.
+        items:
+          description: A tag that can be added to an ElastiCache cluster or replication group. Tags are composed of a Key/Value pair. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. A tag with a null Value is permitted.
+          properties:
+            key:
+              type: string
+            value:
+              type: string
+          type: object
+        type: array
+      userID:
+        description: The ID of the user.
+        type: string
+      userName:
+        description: The username of the user.
+        type: string
+    required:
+      - accessString
+      - engine
+      - userID
+      - userName
+    title: elasticache.services.k8s.aws.User configuration options
+    type: object
+  kind:
+    default: User
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - elasticache.services.k8s.aws.user

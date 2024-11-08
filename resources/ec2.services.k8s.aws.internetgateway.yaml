@@ -1,0 +1,45 @@
+properties:
+  apiVersion:
+    default: ec2.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "InternetGatewaySpec defines the desired state of InternetGateway. \n Describes an internet gateway."
+    properties:
+      tags:
+        description: The tags. The value parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string.
+        items:
+          description: Describes a tag.
+          properties:
+            key:
+              type: string
+            value:
+              type: string
+          type: object
+        type: array
+      vpc:
+        description: The ID of the VPC.
+        type: string
+      vpcRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+    title: ec2.services.k8s.aws.InternetGateway configuration options
+    type: object
+  kind:
+    default: InternetGateway
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - ec2.services.k8s.aws.internetgateway

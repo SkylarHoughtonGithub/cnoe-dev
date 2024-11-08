@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: pe-idp-dev
+  annotations:
+    github.com/project-slug: intelerad-org/pe-idp-dev
+spec:
+  type: other
+  lifecycle: unknown

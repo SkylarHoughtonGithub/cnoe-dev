@@ -1,0 +1,69 @@
+properties:
+  apiVersion:
+    default: apigatewayv2.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "AuthorizerSpec defines the desired state of Authorizer. \n Represents an authorizer."
+    properties:
+      apiID:
+        type: string
+      apiRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      authorizerCredentialsARN:
+        type: string
+      authorizerPayloadFormatVersion:
+        type: string
+      authorizerResultTtlInSeconds:
+        format: int64
+        type: integer
+      authorizerType:
+        type: string
+      authorizerURI:
+        type: string
+      enableSimpleResponses:
+        type: boolean
+      identitySource:
+        items:
+          type: string
+        type: array
+      identityValidationExpression:
+        type: string
+      jwtConfiguration:
+        description: Represents the configuration of a JWT authorizer. Required for the JWT authorizer type. Supported only for HTTP APIs.
+        properties:
+          audience:
+            items:
+              type: string
+            type: array
+          issuer:
+            description: A string representation of a URI with a length between [1-2048].
+            type: string
+        type: object
+      name:
+        type: string
+    required:
+      - authorizerType
+      - identitySource
+      - name
+    title: apigatewayv2.services.k8s.aws.Authorizer configuration options
+    type: object
+  kind:
+    default: Authorizer
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - apigatewayv2.services.k8s.aws.authorizer

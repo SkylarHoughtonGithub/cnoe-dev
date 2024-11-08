@@ -1,0 +1,165 @@
+properties:
+  apiVersion:
+    default: memorydb.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "ClusterSpec defines the desired state of Cluster. \n Contains all of the attributes of a specific cluster."
+    properties:
+      aclName:
+        description: The name of the Access Control List to associate with the cluster.
+        type: string
+      aclRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      autoMinorVersionUpgrade:
+        description: When set to true, the cluster will automatically receive minor engine version upgrades after launch.
+        type: boolean
+      description:
+        description: An optional description of the cluster.
+        type: string
+      engineVersion:
+        description: The version number of the Redis engine to be used for the cluster.
+        type: string
+      kmsKeyID:
+        description: The ID of the KMS key used to encrypt the cluster.
+        type: string
+      maintenanceWindow:
+        description: Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.
+        type: string
+      name:
+        description: The name of the cluster. This value must be unique as it also serves as the cluster identifier.
+        type: string
+      nodeType:
+        description: The compute and memory capacity of the nodes in the cluster.
+        type: string
+      numReplicasPerShard:
+        description: The number of replicas to apply to each shard. The default value is 1. The maximum is 5.
+        format: int64
+        type: integer
+      numShards:
+        description: The number of shards the cluster will contain. The default value is 1.
+        format: int64
+        type: integer
+      parameterGroupName:
+        description: The name of the parameter group associated with the cluster.
+        type: string
+      parameterGroupRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      port:
+        description: The port number on which each of the nodes accepts connections.
+        format: int64
+        type: integer
+      securityGroupIDs:
+        description: A list of security group names to associate with this cluster.
+        items:
+          type: string
+        type: array
+      securityGroupRefs:
+        items:
+          description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+          properties:
+            from:
+              description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+              properties:
+                name:
+                  type: string
+              type: object
+          type: object
+        type: array
+      snapshotARNs:
+        description: A list of Amazon Resource Names (ARN) that uniquely identify the RDB snapshot files stored in Amazon S3. The snapshot files are used to populate the new cluster. The Amazon S3 object name in the ARN cannot contain any commas.
+        items:
+          type: string
+        type: array
+      snapshotName:
+        description: The name of a snapshot from which to restore data into the new cluster. The snapshot status changes to restoring while the new cluster is being created.
+        type: string
+      snapshotRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      snapshotRetentionLimit:
+        description: The number of days for which MemoryDB retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.
+        format: int64
+        type: integer
+      snapshotWindow:
+        description: "The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard. \n Example: 05:00-09:00 \n If you do not specify this parameter, MemoryDB automatically chooses an appropriate time range."
+        type: string
+      snsTopicARN:
+        description: The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.
+        type: string
+      snsTopicRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      subnetGroupName:
+        description: The name of the subnet group to be used for the cluster.
+        type: string
+      subnetGroupRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      tags:
+        description: 'A list of tags to be added to this resource. Tags are comma-separated key,value pairs (e.g. Key=myKey, Value=myKeyValue. You can include multiple tags as shown following: Key=myKey, Value=myKeyValue Key=mySecondKey, Value=mySecondKeyValue.'
+        items:
+          description: A tag that can be added to an MemoryDB resource. Tags are composed of a Key/Value pair. You can use tags to categorize and track all your MemoryDB resources. When you add or remove tags on clusters, those actions will be replicated to all nodes in the cluster. A tag with a null Value is permitted. For more information, see Tagging your MemoryDB resources (https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging-resources.html)
+          properties:
+            key:
+              type: string
+            value:
+              type: string
+          type: object
+        type: array
+      tlsEnabled:
+        description: A flag to enable in-transit encryption on the cluster.
+        type: boolean
+    required:
+      - name
+      - nodeType
+    title: memorydb.services.k8s.aws.Cluster configuration options
+    type: object
+  kind:
+    default: Cluster
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - memorydb.services.k8s.aws.cluster

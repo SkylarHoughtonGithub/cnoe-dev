@@ -1,0 +1,47 @@
+properties:
+  apiVersion:
+    default: elasticache.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "CacheSubnetGroupSpec defines the desired state of CacheSubnetGroup. \n Represents the output of one of the following operations: \n * CreateCacheSubnetGroup \n * ModifyCacheSubnetGroup"
+    properties:
+      cacheSubnetGroupDescription:
+        description: A description for the cache subnet group.
+        type: string
+      cacheSubnetGroupName:
+        description: "A name for the cache subnet group. This value is stored as a lowercase string. \n Constraints: Must contain no more than 255 alphanumeric characters or hyphens. \n Example: mysubnetgroup"
+        type: string
+      subnetIDs:
+        description: A list of VPC subnet IDs for the cache subnet group.
+        items:
+          type: string
+        type: array
+      tags:
+        description: A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.
+        items:
+          description: A tag that can be added to an ElastiCache cluster or replication group. Tags are composed of a Key/Value pair. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. A tag with a null Value is permitted.
+          properties:
+            key:
+              type: string
+            value:
+              type: string
+          type: object
+        type: array
+    required:
+      - cacheSubnetGroupDescription
+      - cacheSubnetGroupName
+      - subnetIDs
+    title: elasticache.services.k8s.aws.CacheSubnetGroup configuration options
+    type: object
+  kind:
+    default: CacheSubnetGroup
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - elasticache.services.k8s.aws.cachesubnetgroup

@@ -1,0 +1,87 @@
+properties:
+  apiVersion:
+    default: apigatewayv2.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "RouteSpec defines the desired state of Route. \n Represents a route."
+    properties:
+      apiID:
+        type: string
+      apiKeyRequired:
+        type: boolean
+      apiRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      authorizationScopes:
+        items:
+          type: string
+        type: array
+      authorizationType:
+        type: string
+      authorizerID:
+        type: string
+      authorizerRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      modelSelectionExpression:
+        type: string
+      operationName:
+        type: string
+      requestModels:
+        additionalProperties:
+          type: string
+        type: object
+      requestParameters:
+        additionalProperties:
+          description: Validation constraints imposed on parameters of a request (path, query string, headers).
+          properties:
+            required:
+              type: boolean
+          type: object
+        type: object
+      routeKey:
+        type: string
+      routeResponseSelectionExpression:
+        type: string
+      target:
+        type: string
+      targetRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+    required:
+      - routeKey
+    title: apigatewayv2.services.k8s.aws.Route configuration options
+    type: object
+  kind:
+    default: Route
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - apigatewayv2.services.k8s.aws.route

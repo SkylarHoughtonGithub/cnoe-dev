@@ -1,0 +1,99 @@
+properties:
+  apiVersion:
+    default: cloudfront.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "CachePolicySpec defines the desired state of CachePolicy. \n A cache policy. \n When it's attached to a cache behavior, the cache policy determines the following: \n * The values that CloudFront includes in the cache key. These values can include HTTP headers, cookies, and URL query strings. CloudFront uses the cache key to find an object in its cache that it can return to the viewer. \n * The default, minimum, and maximum time to live (TTL) values that you want objects to stay in the CloudFront cache. \n The headers, cookies, and query strings that are included in the cache key are also included in requests that CloudFront sends to the origin. CloudFront sends a request when it can't find a valid object in its cache that matches the request's cache key. If you want to send values to the origin but not include them in the cache key, use OriginRequestPolicy."
+    properties:
+      cachePolicyConfig:
+        description: A cache policy configuration.
+        properties:
+          comment:
+            type: string
+          defaultTTL:
+            format: int64
+            type: integer
+          maxTTL:
+            format: int64
+            type: integer
+          minTTL:
+            format: int64
+            type: integer
+          name:
+            type: string
+          parametersInCacheKeyAndForwardedToOrigin:
+            description: "This object determines the values that CloudFront includes in the cache key. These values can include HTTP headers, cookies, and URL query strings. CloudFront uses the cache key to find an object in its cache that it can return to the viewer. \n The headers, cookies, and query strings that are included in the cache key are also included in requests that CloudFront sends to the origin. CloudFront sends a request when it can't find an object in its cache that matches the request's cache key. If you want to send values to the origin but not include them in the cache key, use OriginRequestPolicy."
+            properties:
+              cookiesConfig:
+                description: An object that determines whether any cookies in viewer requests (and if so, which cookies) are included in the cache key and in requests that CloudFront sends to the origin.
+                properties:
+                  cookieBehavior:
+                    type: string
+                  cookies:
+                    description: Contains a list of cookie names.
+                    properties:
+                      items:
+                        items:
+                          type: string
+                        type: array
+                      quantity:
+                        format: int64
+                        type: integer
+                    type: object
+                type: object
+              enableAcceptEncodingBrotli:
+                type: boolean
+              enableAcceptEncodingGzip:
+                type: boolean
+              headersConfig:
+                description: An object that determines whether any HTTP headers (and if so, which headers) are included in the cache key and in requests that CloudFront sends to the origin.
+                properties:
+                  headerBehavior:
+                    type: string
+                  headers:
+                    description: Contains a list of HTTP header names.
+                    properties:
+                      items:
+                        items:
+                          type: string
+                        type: array
+                      quantity:
+                        format: int64
+                        type: integer
+                    type: object
+                type: object
+              queryStringsConfig:
+                description: An object that determines whether any URL query strings in viewer requests (and if so, which query strings) are included in the cache key and in requests that CloudFront sends to the origin.
+                properties:
+                  queryStringBehavior:
+                    type: string
+                  queryStrings:
+                    description: Contains a list of query string names.
+                    properties:
+                      items:
+                        items:
+                          type: string
+                        type: array
+                      quantity:
+                        format: int64
+                        type: integer
+                    type: object
+                type: object
+            type: object
+        type: object
+    required:
+      - cachePolicyConfig
+    title: cloudfront.services.k8s.aws.CachePolicy configuration options
+    type: object
+  kind:
+    default: CachePolicy
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - cloudfront.services.k8s.aws.cachepolicy

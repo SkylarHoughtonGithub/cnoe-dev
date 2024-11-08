@@ -1,0 +1,42 @@
+properties:
+  apiVersion:
+    default: rds.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "GlobalClusterSpec defines the desired state of GlobalCluster. \n A data type representing an Aurora global database."
+    properties:
+      databaseName:
+        description: The name for your database of up to 64 alphanumeric characters. If you do not provide a name, Amazon Aurora will not create a database in the global database cluster you are creating.
+        type: string
+      deletionProtection:
+        description: The deletion protection setting for the new global database. The global database can't be deleted when deletion protection is enabled.
+        type: boolean
+      engine:
+        description: The name of the database engine to be used for this DB cluster.
+        type: string
+      engineVersion:
+        description: The engine version of the Aurora global database.
+        type: string
+      globalClusterIdentifier:
+        description: The cluster identifier of the new global database cluster.
+        type: string
+      sourceDBClusterIdentifier:
+        description: The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional.
+        type: string
+      storageEncrypted:
+        description: The storage encryption setting for the new global database cluster.
+        type: boolean
+    title: rds.services.k8s.aws.GlobalCluster configuration options
+    type: object
+  kind:
+    default: GlobalCluster
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - rds.services.k8s.aws.globalcluster

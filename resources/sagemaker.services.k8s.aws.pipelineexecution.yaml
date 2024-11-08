@@ -1,0 +1,50 @@
+properties:
+  apiVersion:
+    default: sagemaker.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "PipelineExecutionSpec defines the desired state of PipelineExecution. \n An execution of a pipeline."
+    properties:
+      parallelismConfiguration:
+        description: This configuration, if specified, overrides the parallelism configuration of the parent pipeline for this specific run.
+        properties:
+          maxParallelExecutionSteps:
+            format: int64
+            type: integer
+        type: object
+      pipelineExecutionDescription:
+        description: The description of the pipeline execution.
+        type: string
+      pipelineExecutionDisplayName:
+        description: The display name of the pipeline execution.
+        type: string
+      pipelineName:
+        description: The name of the pipeline.
+        type: string
+      pipelineParameters:
+        description: Contains a list of pipeline parameters. This list can be empty.
+        items:
+          description: Assigns a value to a named Pipeline parameter.
+          properties:
+            name:
+              type: string
+            value:
+              type: string
+          type: object
+        type: array
+    required:
+      - pipelineName
+    title: sagemaker.services.k8s.aws.PipelineExecution configuration options
+    type: object
+  kind:
+    default: PipelineExecution
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - sagemaker.services.k8s.aws.pipelineexecution

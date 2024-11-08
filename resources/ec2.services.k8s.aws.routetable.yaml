@@ -1,0 +1,118 @@
+properties:
+  apiVersion:
+    default: ec2.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "RouteTableSpec defines the desired state of RouteTable. \n Describes a route table."
+    properties:
+      routes:
+        items:
+          properties:
+            carrierGatewayID:
+              type: string
+            coreNetworkARN:
+              type: string
+            destinationCIDRBlock:
+              type: string
+            destinationIPv6CIDRBlock:
+              type: string
+            destinationPrefixListID:
+              type: string
+            egressOnlyInternetGatewayID:
+              type: string
+            gatewayID:
+              type: string
+            gatewayRef:
+              description: Reference field for GatewayID
+              properties:
+                from:
+                  description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+                  properties:
+                    name:
+                      type: string
+                  type: object
+              type: object
+            instanceID:
+              type: string
+            localGatewayID:
+              type: string
+            natGatewayID:
+              type: string
+            natGatewayRef:
+              description: Reference field for NATGatewayID
+              properties:
+                from:
+                  description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+                  properties:
+                    name:
+                      type: string
+                  type: object
+              type: object
+            networkInterfaceID:
+              type: string
+            transitGatewayID:
+              type: string
+            transitGatewayRef:
+              description: Reference field for TransitGatewayID
+              properties:
+                from:
+                  description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+                  properties:
+                    name:
+                      type: string
+                  type: object
+              type: object
+            vpcEndpointID:
+              type: string
+            vpcEndpointRef:
+              description: Reference field for VPCEndpointID
+              properties:
+                from:
+                  description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+                  properties:
+                    name:
+                      type: string
+                  type: object
+              type: object
+            vpcPeeringConnectionID:
+              type: string
+          type: object
+        type: array
+      tags:
+        description: The tags. The value parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string.
+        items:
+          description: Describes a tag.
+          properties:
+            key:
+              type: string
+            value:
+              type: string
+          type: object
+        type: array
+      vpcID:
+        description: The ID of the VPC.
+        type: string
+      vpcRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+    title: ec2.services.k8s.aws.RouteTable configuration options
+    type: object
+  kind:
+    default: RouteTable
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - ec2.services.k8s.aws.routetable

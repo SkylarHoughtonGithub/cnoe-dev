@@ -1,0 +1,67 @@
+properties:
+  apiVersion:
+    default: lambda.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "FunctionUrlConfigSpec defines the desired state of FunctionUrlConfig. \n Details about a Lambda function URL."
+    properties:
+      authType:
+        description: The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see Security and auth model for Lambda function URLs (https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).
+        type: string
+      cors:
+        description: The cross-origin resource sharing (CORS) (https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) settings for your function URL.
+        properties:
+          allowCredentials:
+            type: boolean
+          allowHeaders:
+            items:
+              type: string
+            type: array
+          allowMethods:
+            items:
+              type: string
+            type: array
+          allowOrigins:
+            items:
+              type: string
+            type: array
+          exposeHeaders:
+            items:
+              type: string
+            type: array
+          maxAge:
+            format: int64
+            type: integer
+        type: object
+      functionName:
+        description: "The name of the Lambda function. \n Name formats \n * Function name – my-function. \n * Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function. \n * Partial ARN – 123456789012:function:my-function. \n The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length."
+        type: string
+      functionRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      qualifier:
+        description: The alias name.
+        type: string
+    required:
+      - authType
+    title: lambda.services.k8s.aws.FunctionURLConfig configuration options
+    type: object
+  kind:
+    default: FunctionURLConfig
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - lambda.services.k8s.aws.functionurlconfig

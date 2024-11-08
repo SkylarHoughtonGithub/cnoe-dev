@@ -1,0 +1,38 @@
+properties:
+  apiVersion:
+    default: apigatewayv2.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "VpcLinkSpec defines the desired state of VpcLink. \n Represents a VPC link."
+    properties:
+      name:
+        type: string
+      securityGroupIDs:
+        items:
+          type: string
+        type: array
+      subnetIDs:
+        items:
+          type: string
+        type: array
+      tags:
+        additionalProperties:
+          type: string
+        type: object
+    required:
+      - name
+      - subnetIDs
+    title: apigatewayv2.services.k8s.aws.VPCLink configuration options
+    type: object
+  kind:
+    default: VPCLink
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - apigatewayv2.services.k8s.aws.vpclink

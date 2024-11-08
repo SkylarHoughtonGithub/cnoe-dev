@@ -1,0 +1,73 @@
+properties:
+  apiVersion:
+    default: iam.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "UserSpec defines the desired state of User. \n Contains information about an IAM user entity. \n This data type is used as a response element in the following operations: \n * CreateUser \n * GetUser \n * ListUsers"
+    properties:
+      inlinePolicies:
+        additionalProperties:
+          type: string
+        type: object
+      name:
+        description: "The name of the user to create. \n IAM user, group, role, and policy names must be unique within the account. Names are not distinguished by case. For example, you cannot create resources named both \"MyResource\" and \"myresource\"."
+        type: string
+      path:
+        description: "The path for the user name. For more information about paths, see IAM identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the IAM User Guide. \n This parameter is optional. If it is not included, it defaults to a slash (/). \n This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes. In addition, it can contain any ASCII character from the ! (\\u0021) through the DEL character (\\u007F), including most punctuation characters, digits, and upper and lowercased letters."
+        type: string
+      permissionsBoundary:
+        description: The ARN of the policy that is used to set the permissions boundary for the user.
+        type: string
+      permissionsBoundaryRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      policies:
+        items:
+          type: string
+        type: array
+      policyRefs:
+        items:
+          description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+          properties:
+            from:
+              description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+              properties:
+                name:
+                  type: string
+              type: object
+          type: object
+        type: array
+      tags:
+        description: "A list of tags that you want to attach to the new user. Each tag consists of a key name and an associated value. For more information about tagging, see Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User Guide. \n If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request fails and the resource is not created."
+        items:
+          description: A structure that represents user-provided metadata that can be associated with an IAM resource. For more information about tagging, see Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User Guide.
+          properties:
+            key:
+              type: string
+            value:
+              type: string
+          type: object
+        type: array
+    required:
+      - name
+    title: iam.services.k8s.aws.User configuration options
+    type: object
+  kind:
+    default: User
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - iam.services.k8s.aws.user

@@ -1,0 +1,93 @@
+properties:
+  apiVersion:
+    default: apigatewayv2.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "IntegrationSpec defines the desired state of Integration. \n Represents an integration."
+    properties:
+      apiID:
+        type: string
+      apiRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      connectionID:
+        type: string
+      connectionRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      connectionType:
+        type: string
+      contentHandlingStrategy:
+        type: string
+      credentialsARN:
+        type: string
+      description:
+        type: string
+      integrationMethod:
+        type: string
+      integrationSubtype:
+        type: string
+      integrationType:
+        type: string
+      integrationURI:
+        type: string
+      passthroughBehavior:
+        type: string
+      payloadFormatVersion:
+        type: string
+      requestParameters:
+        additionalProperties:
+          type: string
+        type: object
+      requestTemplates:
+        additionalProperties:
+          type: string
+        type: object
+      responseParameters:
+        additionalProperties:
+          additionalProperties:
+            type: string
+          type: object
+        type: object
+      templateSelectionExpression:
+        type: string
+      timeoutInMillis:
+        format: int64
+        type: integer
+      tlsConfig:
+        description: The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.
+        properties:
+          serverNameToVerify:
+            description: A string with a length between [1-512].
+            type: string
+        type: object
+    required:
+      - integrationType
+    title: apigatewayv2.services.k8s.aws.Integration configuration options
+    type: object
+  kind:
+    default: Integration
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - apigatewayv2.services.k8s.aws.integration

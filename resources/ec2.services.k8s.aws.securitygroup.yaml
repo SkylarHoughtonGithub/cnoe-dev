@@ -1,0 +1,182 @@
+properties:
+  apiVersion:
+    default: ec2.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "SecurityGroupSpec defines the desired state of SecurityGroup. \n Describes a security group."
+    properties:
+      description:
+        description: "A description for the security group. This is informational only. \n Constraints: Up to 255 characters in length \n Constraints for EC2-Classic: ASCII characters \n Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*"
+        type: string
+      egressRules:
+        items:
+          description: Describes a set of permissions for a security group rule.
+          properties:
+            fromPort:
+              format: int64
+              type: integer
+            ipProtocol:
+              type: string
+            ipRanges:
+              items:
+                description: Describes an IPv4 range.
+                properties:
+                  cidrIP:
+                    type: string
+                  description:
+                    type: string
+                type: object
+              type: array
+            ipv6Ranges:
+              items:
+                description: '[EC2-VPC only] Describes an IPv6 range.'
+                properties:
+                  cidrIPv6:
+                    type: string
+                  description:
+                    type: string
+                type: object
+              type: array
+            prefixListIDs:
+              items:
+                description: Describes a prefix list ID.
+                properties:
+                  description:
+                    type: string
+                  prefixListID:
+                    type: string
+                type: object
+              type: array
+            toPort:
+              format: int64
+              type: integer
+            userIDGroupPairs:
+              items:
+                description: "Describes a security group and Amazon Web Services account ID pair. \n We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the Amazon Elastic Compute Cloud User Guide."
+                properties:
+                  description:
+                    type: string
+                  groupID:
+                    type: string
+                  groupName:
+                    type: string
+                  peeringStatus:
+                    type: string
+                  userID:
+                    type: string
+                  vpcID:
+                    type: string
+                  vpcPeeringConnectionID:
+                    type: string
+                type: object
+              type: array
+          type: object
+        type: array
+      ingressRules:
+        items:
+          description: Describes a set of permissions for a security group rule.
+          properties:
+            fromPort:
+              format: int64
+              type: integer
+            ipProtocol:
+              type: string
+            ipRanges:
+              items:
+                description: Describes an IPv4 range.
+                properties:
+                  cidrIP:
+                    type: string
+                  description:
+                    type: string
+                type: object
+              type: array
+            ipv6Ranges:
+              items:
+                description: '[EC2-VPC only] Describes an IPv6 range.'
+                properties:
+                  cidrIPv6:
+                    type: string
+                  description:
+                    type: string
+                type: object
+              type: array
+            prefixListIDs:
+              items:
+                description: Describes a prefix list ID.
+                properties:
+                  description:
+                    type: string
+                  prefixListID:
+                    type: string
+                type: object
+              type: array
+            toPort:
+              format: int64
+              type: integer
+            userIDGroupPairs:
+              items:
+                description: "Describes a security group and Amazon Web Services account ID pair. \n We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the Amazon Elastic Compute Cloud User Guide."
+                properties:
+                  description:
+                    type: string
+                  groupID:
+                    type: string
+                  groupName:
+                    type: string
+                  peeringStatus:
+                    type: string
+                  userID:
+                    type: string
+                  vpcID:
+                    type: string
+                  vpcPeeringConnectionID:
+                    type: string
+                type: object
+              type: array
+          type: object
+        type: array
+      name:
+        description: "The name of the security group. \n Constraints: Up to 255 characters in length. Cannot start with sg-. \n Constraints for EC2-Classic: ASCII characters \n Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*"
+        type: string
+      tags:
+        description: The tags. The value parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string.
+        items:
+          description: Describes a tag.
+          properties:
+            key:
+              type: string
+            value:
+              type: string
+          type: object
+        type: array
+      vpcID:
+        description: '[EC2-VPC] The ID of the VPC. Required for EC2-VPC.'
+        type: string
+      vpcRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+    required:
+      - description
+      - name
+    title: ec2.services.k8s.aws.SecurityGroup configuration options
+    type: object
+  kind:
+    default: SecurityGroup
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - ec2.services.k8s.aws.securitygroup

@@ -1,0 +1,50 @@
+properties:
+  apiVersion:
+    default: emrcontainers.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "VirtualClusterSpec defines the desired state of VirtualCluster. \n This entity describes a virtual cluster. A virtual cluster is a Kubernetes namespace that Amazon EMR is registered with. Amazon EMR uses virtual clusters to run jobs and host endpoints. Multiple virtual clusters can be backed by the same physical cluster. However, each virtual cluster maps to one namespace on an EKS cluster. Virtual clusters do not create any active resources that contribute to your bill or that require lifecycle management outside the service."
+    properties:
+      containerProvider:
+        description: The container provider of the virtual cluster.
+        properties:
+          id:
+            type: string
+          info:
+            description: The information about the container used for a job run or a managed endpoint.
+            properties:
+              eksInfo:
+                description: The information about the EKS cluster.
+                properties:
+                  namespace:
+                    type: string
+                type: object
+            type: object
+          type_:
+            type: string
+        type: object
+      name:
+        description: The specified name of the virtual cluster.
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: The tags assigned to the virtual cluster.
+        type: object
+    required:
+      - containerProvider
+      - name
+    title: emrcontainers.services.k8s.aws.VirtualCluster configuration options
+    type: object
+  kind:
+    default: VirtualCluster
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - emrcontainers.services.k8s.aws.virtualcluster

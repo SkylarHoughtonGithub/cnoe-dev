@@ -1,0 +1,291 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  description: Deploy Resource to Kubernetes
+  name: deploy-resources
+  title: Deploy Resources
+spec:
+  owner: guest
+  parameters:
+    - dependencies:
+        resources:
+          oneOf:
+            - $yaml: resources/acm.services.k8s.aws.certificate.yaml
+            - $yaml: resources/apigatewayv2.services.k8s.aws.api.yaml
+            - $yaml: resources/apigatewayv2.services.k8s.aws.authorizer.yaml
+            - $yaml: resources/apigatewayv2.services.k8s.aws.deployment.yaml
+            - $yaml: resources/apigatewayv2.services.k8s.aws.integration.yaml
+            - $yaml: resources/apigatewayv2.services.k8s.aws.route.yaml
+            - $yaml: resources/apigatewayv2.services.k8s.aws.stage.yaml
+            - $yaml: resources/apigatewayv2.services.k8s.aws.vpclink.yaml
+            - $yaml: resources/applicationautoscaling.services.k8s.aws.scalabletarget.yaml
+            - $yaml: resources/applicationautoscaling.services.k8s.aws.scalingpolicy.yaml
+            - $yaml: resources/cloudfront.services.k8s.aws.cachepolicy.yaml
+            - $yaml: resources/cloudtrail.services.k8s.aws.eventdatastore.yaml
+            - $yaml: resources/cloudtrail.services.k8s.aws.trail.yaml
+            - $yaml: resources/dynamodb.services.k8s.aws.backup.yaml
+            - $yaml: resources/dynamodb.services.k8s.aws.globaltable.yaml
+            - $yaml: resources/dynamodb.services.k8s.aws.table.yaml
+            - $yaml: resources/ec2.services.k8s.aws.dhcpoptions.yaml
+            - $yaml: resources/ec2.services.k8s.aws.elasticipaddress.yaml
+            - $yaml: resources/ec2.services.k8s.aws.instance.yaml
+            - $yaml: resources/ec2.services.k8s.aws.internetgateway.yaml
+            - $yaml: resources/ec2.services.k8s.aws.natgateway.yaml
+            - $yaml: resources/ec2.services.k8s.aws.routetable.yaml
+            - $yaml: resources/ec2.services.k8s.aws.securitygroup.yaml
+            - $yaml: resources/ec2.services.k8s.aws.subnet.yaml
+            - $yaml: resources/ec2.services.k8s.aws.transitgateway.yaml
+            - $yaml: resources/ec2.services.k8s.aws.vpcendpoint.yaml
+            - $yaml: resources/ec2.services.k8s.aws.vpc.yaml
+            - $yaml: resources/ecr.services.k8s.aws.pullthroughcacherule.yaml
+            - $yaml: resources/ecr.services.k8s.aws.repository.yaml
+            - $yaml: resources/eks.services.k8s.aws.addon.yaml
+            - $yaml: resources/eks.services.k8s.aws.cluster.yaml
+            - $yaml: resources/eks.services.k8s.aws.fargateprofile.yaml
+            - $yaml: resources/eks.services.k8s.aws.nodegroup.yaml
+            - $yaml: resources/elasticache.services.k8s.aws.cacheparametergroup.yaml
+            - $yaml: resources/elasticache.services.k8s.aws.cachesubnetgroup.yaml
+            - $yaml: resources/elasticache.services.k8s.aws.replicationgroup.yaml
+            - $yaml: resources/elasticache.services.k8s.aws.snapshot.yaml
+            - $yaml: resources/elasticache.services.k8s.aws.usergroup.yaml
+            - $yaml: resources/elasticache.services.k8s.aws.user.yaml
+            - $yaml: resources/elasticsearchservice.services.k8s.aws.elasticsearchdomain.yaml
+            - $yaml: resources/emrcontainers.services.k8s.aws.jobrun.yaml
+            - $yaml: resources/emrcontainers.services.k8s.aws.virtualcluster.yaml
+            - $yaml: resources/eventbridge.services.k8s.aws.archive.yaml
+            - $yaml: resources/eventbridge.services.k8s.aws.endpoint.yaml
+            - $yaml: resources/eventbridge.services.k8s.aws.eventbus.yaml
+            - $yaml: resources/eventbridge.services.k8s.aws.rule.yaml
+            - $yaml: resources/iam.services.k8s.aws.group.yaml
+            - $yaml: resources/iam.services.k8s.aws.openidconnectprovider.yaml
+            - $yaml: resources/iam.services.k8s.aws.policy.yaml
+            - $yaml: resources/iam.services.k8s.aws.role.yaml
+            - $yaml: resources/iam.services.k8s.aws.user.yaml
+            - $yaml: resources/kafka.services.k8s.aws.cluster.yaml
+            - $yaml: resources/kinesis.services.k8s.aws.stream.yaml
+            - $yaml: resources/kms.services.k8s.aws.alias.yaml
+            - $yaml: resources/kms.services.k8s.aws.grant.yaml
+            - $yaml: resources/kms.services.k8s.aws.key.yaml
+            - $yaml: resources/lambda.services.k8s.aws.alias.yaml
+            - $yaml: resources/lambda.services.k8s.aws.codesigningconfig.yaml
+            - $yaml: resources/lambda.services.k8s.aws.eventsourcemapping.yaml
+            - $yaml: resources/lambda.services.k8s.aws.function.yaml
+            - $yaml: resources/lambda.services.k8s.aws.functionurlconfig.yaml
+            - $yaml: resources/lambda.services.k8s.aws.layerversion.yaml
+            - $yaml: resources/memorydb.services.k8s.aws.acl.yaml
+            - $yaml: resources/memorydb.services.k8s.aws.cluster.yaml
+            - $yaml: resources/memorydb.services.k8s.aws.parametergroup.yaml
+            - $yaml: resources/memorydb.services.k8s.aws.snapshot.yaml
+            - $yaml: resources/memorydb.services.k8s.aws.subnetgroup.yaml
+            - $yaml: resources/memorydb.services.k8s.aws.user.yaml
+            - $yaml: resources/mq.services.k8s.aws.broker.yaml
+            - $yaml: resources/networkfirewall.services.k8s.aws.firewallpolicy.yaml
+            - $yaml: resources/networkfirewall.services.k8s.aws.firewall.yaml
+            - $yaml: resources/networkfirewall.services.k8s.aws.rulegroup.yaml
+            - $yaml: resources/opensearchservice.services.k8s.aws.domain.yaml
+            - $yaml: resources/organizations.services.k8s.aws.organizationalunit.yaml
+            - $yaml: resources/pipes.services.k8s.aws.pipe.yaml
+            - $yaml: resources/prometheusservice.services.k8s.aws.alertmanagerdefinition.yaml
+            - $yaml: resources/prometheusservice.services.k8s.aws.loggingconfiguration.yaml
+            - $yaml: resources/prometheusservice.services.k8s.aws.rulegroupsnamespace.yaml
+            - $yaml: resources/prometheusservice.services.k8s.aws.workspace.yaml
+            - $yaml: resources/rds.services.k8s.aws.dbclusterparametergroup.yaml
+            - $yaml: resources/rds.services.k8s.aws.dbcluster.yaml
+            - $yaml: resources/rds.services.k8s.aws.dbinstance.yaml
+            - $yaml: resources/rds.services.k8s.aws.dbparametergroup.yaml
+            - $yaml: resources/rds.services.k8s.aws.dbproxy.yaml
+            - $yaml: resources/rds.services.k8s.aws.dbsubnetgroup.yaml
+            - $yaml: resources/rds.services.k8s.aws.globalcluster.yaml
+            - $yaml: resources/route53.services.k8s.aws.hostedzone.yaml
+            - $yaml: resources/s3.services.k8s.aws.bucket.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.app.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.dataqualityjobdefinition.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.domain.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.endpointconfig.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.endpoint.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.featuregroup.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.hyperparametertuningjob.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.modelbiasjobdefinition.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.modelexplainabilityjobdefinition.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.modelpackagegroup.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.modelpackage.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.modelqualityjobdefinition.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.model.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.monitoringschedule.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.notebookinstancelifecycleconfig.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.notebookinstance.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.pipelineexecution.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.pipeline.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.processingjob.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.trainingjob.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.transformjob.yaml
+            - $yaml: resources/sagemaker.services.k8s.aws.userprofile.yaml
+            - $yaml: resources/sfn.services.k8s.aws.activity.yaml
+            - $yaml: resources/sfn.services.k8s.aws.statemachine.yaml
+            - $yaml: resources/sns.services.k8s.aws.platformapplication.yaml
+            - $yaml: resources/sns.services.k8s.aws.platformendpoint.yaml
+            - $yaml: resources/sns.services.k8s.aws.subscription.yaml
+            - $yaml: resources/sns.services.k8s.aws.topic.yaml
+            - $yaml: resources/sqs.services.k8s.aws.queue.yaml
+      description: Select a AWS resource to add to your repository.
+      properties:
+        name:
+          description: name of this resource. This will be the name of K8s object.
+          type: string
+        path:
+          default: kustomize/base
+          description: path to place this file into
+          type: string
+        resources:
+          enum:
+            - acm.services.k8s.aws.certificate
+            - apigatewayv2.services.k8s.aws.api
+            - apigatewayv2.services.k8s.aws.authorizer
+            - apigatewayv2.services.k8s.aws.deployment
+            - apigatewayv2.services.k8s.aws.integration
+            - apigatewayv2.services.k8s.aws.route
+            - apigatewayv2.services.k8s.aws.stage
+            - apigatewayv2.services.k8s.aws.vpclink
+            - applicationautoscaling.services.k8s.aws.scalabletarget
+            - applicationautoscaling.services.k8s.aws.scalingpolicy
+            - cloudfront.services.k8s.aws.cachepolicy
+            - cloudtrail.services.k8s.aws.eventdatastore
+            - cloudtrail.services.k8s.aws.trail
+            - dynamodb.services.k8s.aws.backup
+            - dynamodb.services.k8s.aws.globaltable
+            - dynamodb.services.k8s.aws.table
+            - ec2.services.k8s.aws.dhcpoptions
+            - ec2.services.k8s.aws.elasticipaddress
+            - ec2.services.k8s.aws.instance
+            - ec2.services.k8s.aws.internetgateway
+            - ec2.services.k8s.aws.natgateway
+            - ec2.services.k8s.aws.routetable
+            - ec2.services.k8s.aws.securitygroup
+            - ec2.services.k8s.aws.subnet
+            - ec2.services.k8s.aws.transitgateway
+            - ec2.services.k8s.aws.vpcendpoint
+            - ec2.services.k8s.aws.vpc
+            - ecr.services.k8s.aws.pullthroughcacherule
+            - ecr.services.k8s.aws.repository
+            - eks.services.k8s.aws.addon
+            - eks.services.k8s.aws.cluster
+            - eks.services.k8s.aws.fargateprofile
+            - eks.services.k8s.aws.nodegroup
+            - elasticache.services.k8s.aws.cacheparametergroup
+            - elasticache.services.k8s.aws.cachesubnetgroup
+            - elasticache.services.k8s.aws.replicationgroup
+            - elasticache.services.k8s.aws.snapshot
+            - elasticache.services.k8s.aws.usergroup
+            - elasticache.services.k8s.aws.user
+            - elasticsearchservice.services.k8s.aws.elasticsearchdomain
+            - emrcontainers.services.k8s.aws.jobrun
+            - emrcontainers.services.k8s.aws.virtualcluster
+            - eventbridge.services.k8s.aws.archive
+            - eventbridge.services.k8s.aws.endpoint
+            - eventbridge.services.k8s.aws.eventbus
+            - eventbridge.services.k8s.aws.rule
+            - iam.services.k8s.aws.group
+            - iam.services.k8s.aws.openidconnectprovider
+            - iam.services.k8s.aws.policy
+            - iam.services.k8s.aws.role
+            - iam.services.k8s.aws.user
+            - kafka.services.k8s.aws.cluster
+            - kinesis.services.k8s.aws.stream
+            - kms.services.k8s.aws.alias
+            - kms.services.k8s.aws.grant
+            - kms.services.k8s.aws.key
+            - lambda.services.k8s.aws.alias
+            - lambda.services.k8s.aws.codesigningconfig
+            - lambda.services.k8s.aws.eventsourcemapping
+            - lambda.services.k8s.aws.function
+            - lambda.services.k8s.aws.functionurlconfig
+            - lambda.services.k8s.aws.layerversion
+            - memorydb.services.k8s.aws.acl
+            - memorydb.services.k8s.aws.cluster
+            - memorydb.services.k8s.aws.parametergroup
+            - memorydb.services.k8s.aws.snapshot
+            - memorydb.services.k8s.aws.subnetgroup
+            - memorydb.services.k8s.aws.user
+            - mq.services.k8s.aws.broker
+            - networkfirewall.services.k8s.aws.firewallpolicy
+            - networkfirewall.services.k8s.aws.firewall
+            - networkfirewall.services.k8s.aws.rulegroup
+            - opensearchservice.services.k8s.aws.domain
+            - organizations.services.k8s.aws.organizationalunit
+            - pipes.services.k8s.aws.pipe
+            - prometheusservice.services.k8s.aws.alertmanagerdefinition
+            - prometheusservice.services.k8s.aws.loggingconfiguration
+            - prometheusservice.services.k8s.aws.rulegroupsnamespace
+            - prometheusservice.services.k8s.aws.workspace
+            - rds.services.k8s.aws.dbclusterparametergroup
+            - rds.services.k8s.aws.dbcluster
+            - rds.services.k8s.aws.dbinstance
+            - rds.services.k8s.aws.dbparametergroup
+            - rds.services.k8s.aws.dbproxy
+            - rds.services.k8s.aws.dbsubnetgroup
+            - rds.services.k8s.aws.globalcluster
+            - route53.services.k8s.aws.hostedzone
+            - s3.services.k8s.aws.bucket
+            - sagemaker.services.k8s.aws.app
+            - sagemaker.services.k8s.aws.dataqualityjobdefinition
+            - sagemaker.services.k8s.aws.domain
+            - sagemaker.services.k8s.aws.endpointconfig
+            - sagemaker.services.k8s.aws.endpoint
+            - sagemaker.services.k8s.aws.featuregroup
+            - sagemaker.services.k8s.aws.hyperparametertuningjob
+            - sagemaker.services.k8s.aws.modelbiasjobdefinition
+            - sagemaker.services.k8s.aws.modelexplainabilityjobdefinition
+            - sagemaker.services.k8s.aws.modelpackagegroup
+            - sagemaker.services.k8s.aws.modelpackage
+            - sagemaker.services.k8s.aws.modelqualityjobdefinition
+            - sagemaker.services.k8s.aws.model
+            - sagemaker.services.k8s.aws.monitoringschedule
+            - sagemaker.services.k8s.aws.notebookinstancelifecycleconfig
+            - sagemaker.services.k8s.aws.notebookinstance
+            - sagemaker.services.k8s.aws.pipelineexecution
+            - sagemaker.services.k8s.aws.pipeline
+            - sagemaker.services.k8s.aws.processingjob
+            - sagemaker.services.k8s.aws.trainingjob
+            - sagemaker.services.k8s.aws.transformjob
+            - sagemaker.services.k8s.aws.userprofile
+            - sfn.services.k8s.aws.activity
+            - sfn.services.k8s.aws.statemachine
+            - sns.services.k8s.aws.platformapplication
+            - sns.services.k8s.aws.platformendpoint
+            - sns.services.k8s.aws.subscription
+            - sns.services.k8s.aws.topic
+            - sqs.services.k8s.aws.queue
+          type: string
+      required:
+        - awsResources
+        - name
+      title: Choose AWS Resources
+  steps:
+    - action: cnoe:verify:dependency
+      id: verify
+      input:
+        verifiers: ${{ parameters.verifiers }}
+      name: verify
+    - action: roadiehq:utils:serialize:yaml
+      id: serialize
+      input:
+        data:
+          apiVersion: ${{ parameters.apiVersion }}
+          kind: ${{ parameters.kind }}
+          metadata:
+            name: ${{ parameters.name }}
+            namespace: ${{ parameters.namespace }}
+          spec: ${{ parameters.config }}
+      name: serialize
+    - action: cnoe:utils:sanitize
+      id: sanitize
+      input:
+        document: ${{ steps['serialize'].output.serialized }}
+      name: sanitize
+    - action: cnoe:kubernetes:apply
+      id: apply
+      input:
+        manifest: ${{ steps['sanitize'].output.sanitized }}
+        namespaced: true
+      name: apply-manifest
+  type: service

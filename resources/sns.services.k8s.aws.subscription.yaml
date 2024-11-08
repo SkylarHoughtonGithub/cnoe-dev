@@ -1,0 +1,54 @@
+properties:
+  apiVersion:
+    default: sns.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "SubscriptionSpec defines the desired state of Subscription. \n A wrapper type for the attributes of an Amazon SNS subscription."
+    properties:
+      deliveryPolicy:
+        type: string
+      endpoint:
+        description: "The endpoint that you want to receive notifications. Endpoints vary by protocol: \n * For the http protocol, the (public) endpoint is a URL beginning with http://. \n * For the https protocol, the (public) endpoint is a URL beginning with https://. \n * For the email protocol, the endpoint is an email address. \n * For the email-json protocol, the endpoint is an email address. \n * For the sms protocol, the endpoint is a phone number of an SMS-enabled device. \n * For the sqs protocol, the endpoint is the ARN of an Amazon SQS queue. \n * For the application protocol, the endpoint is the EndpointArn of a mobile app and device. \n * For the lambda protocol, the endpoint is the ARN of an Lambda function. \n * For the firehose protocol, the endpoint is the ARN of an Amazon Kinesis Data Firehose delivery stream."
+        type: string
+      filterPolicy:
+        type: string
+      filterPolicyScope:
+        type: string
+      protocol:
+        description: "The protocol that you want to use. Supported protocols include: \n * http – delivery of JSON-encoded message via HTTP POST \n * https – delivery of JSON-encoded message via HTTPS POST \n * email – delivery of message via SMTP \n * email-json – delivery of JSON-encoded message via SMTP \n * sms – delivery of message via SMS \n * sqs – delivery of JSON-encoded message to an Amazon SQS queue \n * application – delivery of JSON-encoded message to an EndpointArn for a mobile app and device \n * lambda – delivery of JSON-encoded message to an Lambda function \n * firehose – delivery of JSON-encoded message to an Amazon Kinesis Data Firehose delivery stream."
+        type: string
+      rawMessageDelivery:
+        type: string
+      redrivePolicy:
+        type: string
+      subscriptionRoleARN:
+        type: string
+      topicARN:
+        description: The ARN of the topic you want to subscribe to.
+        type: string
+      topicRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+    required:
+      - protocol
+    title: sns.services.k8s.aws.Subscription configuration options
+    type: object
+  kind:
+    default: Subscription
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - sns.services.k8s.aws.subscription

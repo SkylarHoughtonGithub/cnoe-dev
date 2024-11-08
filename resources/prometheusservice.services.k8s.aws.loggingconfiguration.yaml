@@ -1,0 +1,39 @@
+properties:
+  apiVersion:
+    default: prometheusservice.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: LoggingConfigurationSpec defines the desired state of LoggingConfiguration.
+    properties:
+      logGroupARN:
+        description: The ARN of the CW log group to which the vended log data will be published.
+        type: string
+      workspaceID:
+        description: The ID of the workspace to vend logs to.
+        type: string
+      workspaceRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+    required:
+      - logGroupARN
+    title: prometheusservice.services.k8s.aws.LoggingConfiguration configuration options
+    type: object
+  kind:
+    default: LoggingConfiguration
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - prometheusservice.services.k8s.aws.loggingconfiguration

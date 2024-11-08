@@ -1,0 +1,33 @@
+properties:
+  apiVersion:
+    default: ecr.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "PullThroughCacheRuleSpec defines the desired state of PullThroughCacheRule. \n The details of a pull through cache rule."
+    properties:
+      ecrRepositoryPrefix:
+        description: The repository name prefix to use when caching images from the source registry.
+        type: string
+      registryID:
+        description: The Amazon Web Services account ID associated with the registry to create the pull through cache rule for. If you do not specify a registry, the default registry is assumed.
+        type: string
+      upstreamRegistryURL:
+        description: The registry URL of the upstream public registry to use as the source for the pull through cache rule.
+        type: string
+    required:
+      - ecrRepositoryPrefix
+      - upstreamRegistryURL
+    title: ecr.services.k8s.aws.PullThroughCacheRule configuration options
+    type: object
+  kind:
+    default: PullThroughCacheRule
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - ecr.services.k8s.aws.pullthroughcacherule

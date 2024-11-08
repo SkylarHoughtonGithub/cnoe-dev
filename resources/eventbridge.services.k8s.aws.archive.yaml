@@ -1,0 +1,49 @@
+properties:
+  apiVersion:
+    default: eventbridge.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "ArchiveSpec defines the desired state of Archive. \n An Archive object that contains details about an archive."
+    properties:
+      description:
+        description: A description for the archive.
+        type: string
+      eventPattern:
+        description: An event pattern to use to filter events sent to the archive.
+        type: string
+      eventSourceARN:
+        description: The ARN of the event bus that sends events to the archive.
+        type: string
+      eventSourceRef:
+        description: "AWSResourceReferenceWrapper provides a wrapper around *AWSResourceReference type to provide more user friendly syntax for references using 'from' field Ex: APIIDRef: \n from: name: my-api"
+        properties:
+          from:
+            description: AWSResourceReference provides all the values necessary to reference another k8s resource for finding the identifier(Id/ARN/Name)
+            properties:
+              name:
+                type: string
+            type: object
+        type: object
+      name:
+        description: The name for the archive to create.
+        type: string
+      retentionDays:
+        description: The number of days to retain events for. Default value is 0. If set to 0, events are retained indefinitely
+        format: int64
+        type: integer
+    required:
+      - name
+    title: eventbridge.services.k8s.aws.Archive configuration options
+    type: object
+  kind:
+    default: Archive
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - eventbridge.services.k8s.aws.archive

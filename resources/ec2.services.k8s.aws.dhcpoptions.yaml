@@ -1,0 +1,46 @@
+properties:
+  apiVersion:
+    default: ec2.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "DhcpOptionsSpec defines the desired state of DhcpOptions. \n Describes a set of DHCP options."
+    properties:
+      dhcpConfigurations:
+        description: A DHCP configuration option.
+        items:
+          properties:
+            key:
+              type: string
+            values:
+              items:
+                type: string
+              type: array
+          type: object
+        type: array
+      tags:
+        description: The tags. The value parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string.
+        items:
+          description: Describes a tag.
+          properties:
+            key:
+              type: string
+            value:
+              type: string
+          type: object
+        type: array
+    required:
+      - dhcpConfigurations
+    title: ec2.services.k8s.aws.DHCPOptions configuration options
+    type: object
+  kind:
+    default: DHCPOptions
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - ec2.services.k8s.aws.dhcpoptions

@@ -1,0 +1,40 @@
+properties:
+  apiVersion:
+    default: sagemaker.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "ModelPackageGroupSpec defines the desired state of ModelPackageGroup. \n A group of versioned models in the model registry."
+    properties:
+      modelPackageGroupDescription:
+        description: A description for the model group.
+        type: string
+      modelPackageGroupName:
+        description: The name of the model group.
+        type: string
+      tags:
+        description: A list of key value pairs associated with the model group. For more information, see Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon Web Services General Reference Guide.
+        items:
+          description: "A tag object that consists of a key and an optional value, used to manage metadata for SageMaker Amazon Web Services resources. \n You can add tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform jobs, models, labeling jobs, work teams, endpoint configurations, and endpoints. For more information on adding tags to SageMaker resources, see AddTags. \n For more information on adding metadata to your Amazon Web Services resources with tagging, see Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html). For advice on best practices for managing Amazon Web Services resources with tagging, see Tagging Best Practices: Implement an Effective Amazon Web Services Resource Tagging Strategy (https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf)."
+          properties:
+            key:
+              type: string
+            value:
+              type: string
+          type: object
+        type: array
+    required:
+      - modelPackageGroupName
+    title: sagemaker.services.k8s.aws.ModelPackageGroup configuration options
+    type: object
+  kind:
+    default: ModelPackageGroup
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - sagemaker.services.k8s.aws.modelpackagegroup

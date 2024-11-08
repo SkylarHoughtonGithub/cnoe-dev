@@ -1,0 +1,44 @@
+properties:
+  apiVersion:
+    default: ec2.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: ElasticIPAddressSpec defines the desired state of ElasticIPAddress.
+    properties:
+      address:
+        description: '[EC2-VPC] The Elastic IP address to recover or an IPv4 address from an address pool.'
+        type: string
+      customerOwnedIPv4Pool:
+        description: The ID of a customer-owned address pool. Use this parameter to let Amazon EC2 select an address from the address pool. Alternatively, specify a specific address from the address pool.
+        type: string
+      networkBorderGroup:
+        description: "A unique set of Availability Zones, Local Zones, or Wavelength Zones from which Amazon Web Services advertises IP addresses. Use this parameter to limit the IP address to this location. IP addresses cannot move between network border groups. \n Use DescribeAvailabilityZones (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html) to view the network border groups. \n You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 Classic, you receive an InvalidParameterCombination error."
+        type: string
+      publicIPv4Pool:
+        description: The ID of an address pool that you own. Use this parameter to let Amazon EC2 select an address from the address pool. To specify a specific address from the address pool, use the Address parameter instead.
+        type: string
+      tags:
+        description: The tags. The value parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string.
+        items:
+          description: Describes a tag.
+          properties:
+            key:
+              type: string
+            value:
+              type: string
+          type: object
+        type: array
+    title: ec2.services.k8s.aws.ElasticIPAddress configuration options
+    type: object
+  kind:
+    default: ElasticIPAddress
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - ec2.services.k8s.aws.elasticipaddress

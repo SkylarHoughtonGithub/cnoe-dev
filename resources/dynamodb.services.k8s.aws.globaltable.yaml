@@ -1,0 +1,36 @@
+properties:
+  apiVersion:
+    default: dynamodb.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "GlobalTableSpec defines the desired state of GlobalTable. \n Represents the properties of a global table."
+    properties:
+      globalTableName:
+        description: The global table name.
+        type: string
+      replicationGroup:
+        description: The Regions where the global table needs to be created.
+        items:
+          description: Represents the properties of a replica.
+          properties:
+            regionName:
+              type: string
+          type: object
+        type: array
+    required:
+      - globalTableName
+      - replicationGroup
+    title: dynamodb.services.k8s.aws.GlobalTable configuration options
+    type: object
+  kind:
+    default: GlobalTable
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - dynamodb.services.k8s.aws.globaltable

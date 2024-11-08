@@ -1,0 +1,56 @@
+properties:
+  apiVersion:
+    default: elasticache.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "CacheParameterGroupSpec defines the desired state of CacheParameterGroup. \n Represents the output of a CreateCacheParameterGroup operation."
+    properties:
+      cacheParameterGroupFamily:
+        description: "The name of the cache parameter group family that the cache parameter group can be used with. \n Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x"
+        type: string
+      cacheParameterGroupName:
+        description: A user-specified name for the cache parameter group.
+        type: string
+      description:
+        description: A user-specified description for the cache parameter group.
+        type: string
+      parameterNameValues:
+        description: An array of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional. A maximum of 20 parameters may be modified per request.
+        items:
+          description: Describes a name-value pair that is used to update the value of a parameter.
+          properties:
+            parameterName:
+              type: string
+            parameterValue:
+              type: string
+          type: object
+        type: array
+      tags:
+        description: A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.
+        items:
+          description: A tag that can be added to an ElastiCache cluster or replication group. Tags are composed of a Key/Value pair. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. A tag with a null Value is permitted.
+          properties:
+            key:
+              type: string
+            value:
+              type: string
+          type: object
+        type: array
+    required:
+      - cacheParameterGroupFamily
+      - cacheParameterGroupName
+      - description
+    title: elasticache.services.k8s.aws.CacheParameterGroup configuration options
+    type: object
+  kind:
+    default: CacheParameterGroup
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - elasticache.services.k8s.aws.cacheparametergroup

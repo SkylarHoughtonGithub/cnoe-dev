@@ -1,0 +1,40 @@
+properties:
+  apiVersion:
+    default: lambda.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: "CodeSigningConfigSpec defines the desired state of CodeSigningConfig. \n Details about a Code signing configuration (https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html)."
+    properties:
+      allowedPublishers:
+        description: Signing profiles for this code signing configuration.
+        properties:
+          signingProfileVersionARNs:
+            items:
+              type: string
+            type: array
+        type: object
+      codeSigningPolicies:
+        description: The code signing policies define the actions to take if the validation checks fail.
+        properties:
+          untrustedArtifactOnDeployment:
+            type: string
+        type: object
+      description:
+        description: Descriptive name for this code signing configuration.
+        type: string
+    required:
+      - allowedPublishers
+    title: lambda.services.k8s.aws.CodeSigningConfig configuration options
+    type: object
+  kind:
+    default: CodeSigningConfig
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - lambda.services.k8s.aws.codesigningconfig

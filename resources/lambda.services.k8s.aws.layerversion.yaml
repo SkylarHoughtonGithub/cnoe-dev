@@ -1,0 +1,56 @@
+properties:
+  apiVersion:
+    default: lambda.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: LayerVersionSpec defines the desired state of LayerVersion.
+    properties:
+      compatibleArchitectures:
+        description: A list of compatible instruction set architectures (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
+        items:
+          type: string
+        type: array
+      compatibleRuntimes:
+        description: A list of compatible function runtimes (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). Used for filtering with ListLayers and ListLayerVersions.
+        items:
+          type: string
+        type: array
+      content:
+        description: The function layer archive.
+        properties:
+          s3Bucket:
+            type: string
+          s3Key:
+            type: string
+          s3ObjectVersion:
+            type: string
+          zipFile:
+            format: byte
+            type: string
+        type: object
+      description:
+        description: The description of the version.
+        type: string
+      layerName:
+        description: The name or Amazon Resource Name (ARN) of the layer.
+        type: string
+      licenseInfo:
+        description: "The layer's software license. It can be any of the following: \n * An SPDX license identifier (https://spdx.org/licenses/). For example, MIT. \n * The URL of a license hosted on the internet. For example, https://opensource.org/licenses/MIT. \n * The full text of the license."
+        type: string
+    required:
+      - content
+      - layerName
+    title: lambda.services.k8s.aws.LayerVersion configuration options
+    type: object
+  kind:
+    default: LayerVersion
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - lambda.services.k8s.aws.layerversion

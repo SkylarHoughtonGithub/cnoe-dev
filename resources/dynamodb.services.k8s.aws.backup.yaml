@@ -1,0 +1,30 @@
+properties:
+  apiVersion:
+    default: dynamodb.services.k8s.aws/v1alpha1
+    description: APIVersion for the resource
+    type: string
+  config:
+    description: BackupSpec defines the desired state of Backup.
+    properties:
+      backupName:
+        description: Specified name for the backup.
+        type: string
+      tableName:
+        description: The name of the table.
+        type: string
+    required:
+      - backupName
+      - tableName
+    title: dynamodb.services.k8s.aws.Backup configuration options
+    type: object
+  kind:
+    default: Backup
+    description: Kind for the resource
+    type: string
+  namespace:
+    description: Namespace for the resource
+    namespace: default
+    type: string
+  resources:
+    enum:
+      - dynamodb.services.k8s.aws.backup
